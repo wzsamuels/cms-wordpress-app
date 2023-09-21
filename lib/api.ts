@@ -27,6 +27,27 @@ async function fetchAPI(query = '', { variables }: Record<string, any> = {}) {
   return json.data
 }
 
+export async function getMenus() {
+  const data = await fetchAPI(
+    `
+    query NewQuery {
+      menus {
+        edges {
+          node {
+            id
+            name
+            locations
+          }
+        }
+      }
+      menu(id: "dGVybToz") {
+        name
+      }
+    }
+    `
+  )
+}
+
 export async function getPreviewPost(id, idType = 'DATABASE_ID') {
   const data = await fetchAPI(
     `
